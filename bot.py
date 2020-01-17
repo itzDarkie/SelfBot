@@ -54,7 +54,6 @@ cmd: set [cmd] {reply} | cmdlist | dcmd [cmd]
     ...
 -exit() (Disconnect)
 [Mm]ark [INCHAT] - mark anyway
-[Pp]rice (Here|Channel)
 [Tt]oday 
 
 """

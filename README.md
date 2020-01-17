@@ -1,6 +1,6 @@
 ### Telegram Cli Bot
 
-<p align="center">
+<p >
     <a href="https://gitlab.com/Tabahkar/selfbot">
         <img src="https://i.ibb.co/pXJ9frm/BOgY9ai.png" alt="SelfBot">
     </a>
@@ -32,7 +32,7 @@ cd selfbot/
 3 - edit config file and copy your `api_id` & `api_hash` in fildes.
 
 
-***Warning: If you use another account api your account wA1aAAAAAAAAAA qill Sbe delete by telegram.***
+***Warning: If you use another account api your account will be delete by telegram.***
 
 4 -
 ```bash 
