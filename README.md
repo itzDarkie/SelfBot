@@ -35,7 +35,7 @@ cd SelfBot/
 3 - edit config file and copy your `api_id` & `api_hash` in fildes.
 
 
-***Warning: If you use another account api your account will be delete by telegram.***
+***Warning: If you use an API_KEY from another account. Your account will be deleted by Telegram.***
 
 4 -
 ```bash 
