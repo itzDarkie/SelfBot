@@ -39,7 +39,8 @@ cd SelfBot/
 
 4 -
 ```bash 
-pip3 install -r requirements.txt
+
+***DATABASE***
 #Debian 
 sudo apt install redis-server
 #Arch
@@ -49,6 +50,8 @@ sudo dnf -y install redis
 ## enable and start database
 service redis-server enable
 service redis-server start
+*** install req & run ***
+pip3 install -r requirements.txt
 python3 bot.py
 ```
 
