@@ -19,6 +19,9 @@
 - Python 3.6 or higher.
 - Telegram API key
 
+### Library
+<a href=https://github.com/pyrogram/pyrogram>Pyrogram</a>
+
 ### Installing
 1 - get api key in <a href=https://my.telegram.org/auth> telegram website. </a>
   - enter your number and click on `API development tools` 
