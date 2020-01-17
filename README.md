@@ -1,7 +1,7 @@
 ### Telegram Cli Bot
 
 <p >
-    <a href="https://gitlab.com/Tabahkar/selfbot">
+    <a href="https://github.com/xtabahkar/SelfBot">
         <img src="https://i.ibb.co/pXJ9frm/BOgY9ai.png" alt="SelfBot">
     </a>
 	<br>
@@ -26,7 +26,7 @@
 
 2 - 
 ```bash
-git clone https://gitlab.com/Tabahkar/selfbot
+git clone https://github.com/xtabahkar/SelfBot
 cd selfbot/
 ```
 3 - edit config file and copy your `api_id` & `api_hash` in fildes.
@@ -60,7 +60,7 @@ python3 bot.py
   - `[Ii]D (reply)` : show chat id 
   - `[Pp] qurey` : qurey (bitcoin , ethereum ,litecoin ...) price crypto currency.
   - `[Ss]erver` : Detail Server.
-  - `[Nn]obody | [Ee]verybody` : nobody can see status last seen & online | everybody can see your status last seen & online .
+  - `[Nn]obody | [Ee]verybody` : nobody can see status last seen & online | everybody can see your status last seen & online.
   - `[Ss]pam (digit) (reply)` : Send spam a replyed message To count digits .
   - `[Ss]pamf (digit)` : send message in `listf` as spam 
   - `[Aa]ction` : off|on action in private or group.
