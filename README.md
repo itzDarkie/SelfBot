@@ -9,9 +9,9 @@
 	
 ### Community 
 </p>
-<p align="center">
+<p >
 	<a href="https://t.me/Selfb0t">
-        <img src="https://i.imgur.com/Zze3Olg.png" alt="SelfBot" height="50" width="50">
+        <img src="https://i.imgur.com/Zze3Olg.png" alt="SelfBot" height="100" width="100">
     </a>
 </p>
 
