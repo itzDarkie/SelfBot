@@ -11,7 +11,7 @@
 </p>
 <p >
 	<a href="https://t.me/Selfb0t">
-        <img src="https://i.imgur.com/Zze3Olg.png" alt="SelfBot" height="100" width="100">
+        <img src="https://i.imgur.com/Zze3Olg.png" alt="SelfBot" height="75" width="75">
     </a>
 </p>
 
