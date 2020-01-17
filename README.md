@@ -27,7 +27,7 @@
 2 - 
 ```bash
 git clone https://github.com/xtabahkar/SelfBot
-cd selfbot/
+cd SelfBot/
 ```
 3 - edit config file and copy your `api_id` & `api_hash` in fildes.
 
