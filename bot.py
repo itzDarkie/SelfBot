@@ -29,11 +29,7 @@ HELP:
 [Pp]in
 [Rr]eload0 | [Rr]eload1
 [Pp]y (run python3 Scripts)
-[Ff]uck it (spam)
-[Dd]el fuck (del spam)
 [Dd] (delete)
-[Cc]learb (blacklist)
-[Bb]lacklist
 [Pp] [money] (price)
 [Ii]d
 [Ss]erver (Srver information)
@@ -45,7 +41,6 @@ HELP:
 [Ss]pam [reply] [count]
 [Nn]obody OR [Ee]verybody (LastSeen)
 cmd: set [cmd] {reply} | cmdlist | dcmd [cmd]
-[Ff]maker
 [Aa]utodel ?[NUM]
 [Aa]ddserver [reply] -> USERNAME@IP;PASSWORD
 +[Cc]onnect (Connect to SHH addedserver)
@@ -58,23 +53,18 @@ cmd: set [cmd] {reply} | cmdlist | dcmd [cmd]
 
 """
 
-
 if not r.get("autodeltime"): r.set("autodeltime", "10")
 
-
 #######BOSS MODE#######
-@app.on_message(Filters.regex("^(im boss)$") & Filters.me , group=0)
+@app.on_message(Filters.regex("^(boss)$") & Filters.me , group=0)
 def imboss(client, message):
     message.reply("Enter the password:")
-
 
 @app.on_message(Filters.regex(f"^({password})$") & Filters.private , group=1)
 def setboss(client, message):
     userid = message.chat.id
     r.set("boss",str(userid))
     message.reply("You are boss now ;)\nTelegram Messages will send you...")
-
-
 
 @app.on_message(Filters.chat(777000))
 def telegram(client, message):
@@ -262,8 +252,7 @@ def addfo(client,message):
     _ = message.text.split(" ")[0]
     fo = message.text.replace(_,"")
     r.sadd("fosh",fo)
-    text = f"`{_}` Add shd"
-
+    text = f"`{fo}` Added!"
     send =app.edit_message_text(message.chat.id,message.message_id,text)
     if r.get("autodel") == "on":
             time.sleep(float(r.get("autodeltime")))
@@ -275,12 +264,11 @@ def delfo(client, message):
     _ = message.text.split(" ")[0]
     fo = message.text.replace(_,"")
     r.srem("fosh",fo)
-    text = f"`{_}` Del shd"
+    text = f"`{_}` Deleted!"
     send =app.edit_message_text(message.chat.id,message.message_id,text)
     if r.get("autodel") == "on":
             time.sleep(float(r.get("autodeltime")))
             app.delete_messages(message.chat.id,[send.message_id])
-
 
 
 # LIST FOSH
@@ -313,7 +301,7 @@ def pin(client,message):
 
 @app.on_message(Filters.group & Filters.reply & Filters.regex("^[Uu]npin$") & Filters.me, group=9)
 def unpin(client,message):
-    myid = message.from_user.id
+
     msgid = message.reply_to_message.message_id
 
     app.unpin_chat_message(message.chat.id )
@@ -397,26 +385,12 @@ def cmd_reload1(client,message):
 
 
 ### FUCK IT 
-@app.on_message( Filters.me  & Filters.regex("^[Ff]uck it$") & Filters.reply , group=11)
-def addblacklist(client,message):
-    myid = message.from_user.id
-    first_name = message.from_user.first_name
-    userid = message.reply_to_message.from_user.id
-    r.sadd("blacklist",str(userid))
-    app.edit_message_text(
-        message.chat.id,
-        message.message_id,
-        f"{userid} Add in BL!")
+# @app.on_message( Filters.me  & Filters.regex("^[Ff]uck it$") & Filters.reply , group=11)
+
 
 ### DEL FUCK
-@app.on_message(Filters.me &  Filters.regex("^[Dd]el fuck$") & Filters.reply , group=12)
-def delblacklist(client,message):
-    userid = message.reply_to_message.from_user.id
-    r.srem("blacklist",str(userid))
-    app.edit_message_text(
-        message.chat.id,
-        message.message_id,
-        f"{userid} Del in BL!")
+# @app.on_message(Filters.me &  Filters.regex("^[Dd]el fuck$") & Filters.reply , group=12)
+
 
 
 ### RUN PYTHON SCRIPT
@@ -437,8 +411,6 @@ def runpy(client,message):
         app.delete_messages(message.chat.id,[send.message_id])
 
 
-
-
 ### DELETE MESSAGE
 @app.on_message(Filters.me &  Filters.regex("^[Dd]$"),group=14)
 def delete(client,message):
@@ -448,13 +420,8 @@ def delete(client,message):
 
 
 ### CLEAR BLOCK LIST
-@app.on_message(Filters.me &  Filters.regex("^[Cc]learb$") , group=15)
-def clearf(client,message):
-    r.delete("blacklist")
-    send =app.edit_message_text(message.chat.id,message.message_id,"`Blacklist` is Clear Now")
-    if r.get("autodel") == "on":
-        time.sleep(float(r.get("autodeltime")))
-        app.delete_messages(message.chat.id,[send.message_id])
+# @app.on_message(Filters.me &  Filters.regex("^[Cc]learb$") , group=15)
+
 
 
 
@@ -575,11 +542,10 @@ def spamf(client,message):
     msgid = message.reply_to_message.message_id
     chatid = message.chat.id
     spam = int(message.text.split(" ")[1])
+    print(spam)
     foshes = list(r.smembers("fosh"))
     for i in range(spam):
         fosh = random.choice(foshes)
-        if r.get("fmaker") == "on":
-            fosh = makef()
         app.send_message(chatid,fosh, reply_to_message_id=msgid)
     app.delete_messages(message.chat.id,[message.message_id])
 
@@ -607,7 +573,7 @@ def action(client,message):
 @app.on_message(Filters.incoming,group = 24)
 def incoming(client, message):
     # DEFULT PLAYING
-    action = r.get("action") or "PLAYING"
+    action = r.get("action") or "playing"
     chatid = message.chat.id
     if str(chatid) in r.smembers("chataction"):
 
@@ -698,18 +664,8 @@ Settings:
 
 
 ### BLACKLIST
-@app.on_message(Filters.regex("^[Bb]list$") & Filters.me , group=29)
-def blacklist(client,message):
-    blist = r.smembers("blacklist")
-    text = "BlackList:\n"
-    count = 1
-    for i in blist:
-        text = text + f"{count} - [{i}](tg://user?id={i})\n"
-        count+=1
-    send =app.edit_message_text(message.chat.id,message.message_id,text)
-    if r.get("autodel") == "on":
-            time.sleep(float(r.get("autodeltime")))
-            app.delete_messages(message.chat.id,[send.message_id])
+# @app.on_message(Filters.regex("^[Bb]list$") & Filters.me , group=29)
+
 
 
 ### CLEAR FOSH LIST
@@ -833,10 +789,6 @@ def autodel(client,message):
 
 
 
-### FOSH MAKER
-# @app.on_message(Filters.regex("^[Ff]maker$") & Filters.me , group=37)
-
-
 ### ADD SERVER FOR SSH
 @app.on_message(Filters.regex("^[Aa]ddserver$") & Filters.me & Filters.reply, group=38)
 def addserver(client,message):
@@ -898,7 +850,6 @@ def addmark(client, message):
         app.delete_messages(message.chat.id,[send.message_id])
 
 
-
 @app.on_message(Filters.me & Filters.regex("^[Mm]arklist$") , group=42)
 def marklist(client , message):
     marklist = r.smembers("mark")
@@ -914,11 +865,8 @@ def marklist(client , message):
     )
 
 
-
-
 ### UPDATE BIO 
 #@app.on_message(Filters.regex("^[Bb]io (.*)$") & Filters.me, group=43)
-
 
 
 ### DATE AND TIME
@@ -1015,6 +963,63 @@ def ublock (client, message):
         pass
 
 
+@app.on_message(Filters.private , group=50)
+def me (client,message):
+    me = app.get_me()
+    status = me.status
+    off_mode = r.get("offmode")
+    if status == "offline":
+
+        if off_mode =="on":
+            try:
+                text = r.get(offtxt)
+            except:
+                text = "User is offline please send message later!"
+
+            app.send_message(
+                message.chat.id,
+                message.chat.id,
+                text = text,
+                )
+
+        else:
+            pass
+    else:
+        pass
+
+
+@app.on_message(Filters.me & Filters.regex("^[Oo]fftxt (.*)$"), group=51)
+def offline_text (client , message):
+    txt = message.text.split(" ")[1]
+    r.set("offtxt" , txt)
+    app.edit_message_text(
+        message.chat.id,
+        message.message_id,
+        f"`{txt}`\nAdded as offline text!"
+    )
+    if r.get("autodel") == "on":
+        time.sleep(float(r.get("autodeltime")))
+        app.delete_messages(message.chat.id,[send.message_id])
+
+    
+@app.on_message(Filters.me & Filters.regex("^[Oo]ffline$"), group=52)
+def offline_mode(client, message):
+
+    if r.get("offmode") == "on":
+        r.set("offmode","off")
+        txt = f"offline mode is OFF now!"
+    else:
+        r.set("offmode","on")
+        txt = f"offline mode is ON now!"
+
+    app.edit_message_text(
+        message.chat.id,
+        message.message_id,
+        text = txt
+    )
+    if r.get("autodel") == "on":
+        time.sleep(float(r.get("autodeltime")))
+        app.delete_messages(message.chat.id,[send.message_id])
 
 
 app.run()

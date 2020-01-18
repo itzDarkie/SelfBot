@@ -72,8 +72,6 @@ python3 bot.py
   - `[Ff]uck it (reply)` : add user to blocklist(a list of stupid pepole) and answer user with words in listf . remove user with `[Dd]el fuck`
   - `[Dd] (reply)` : delete a message.
   - `[Pp]y (reply)` : run code python3
-  - `[Cc]learb` : clear blocklist.
-  - `[Bb]list` : show blocklist.
   - `[Ii]D (reply)` : show chat id 
   - `[Pp] qurey` : qurey (bitcoin , ethereum ,litecoin ...) price crypto currency.
   - `[Ss]erver` : Detail Server.
