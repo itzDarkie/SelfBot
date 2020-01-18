@@ -69,7 +69,6 @@ python3 bot.py
   - `[Pp]in (reply)` : Pin replay message in group.
   - `[Uu]npin (reply)` : Unpin replay message in group.
   - `[Rr]eload0` & `[Rr]eload1` : Funny command.
-  - `[Ff]uck it (reply)` : add user to blocklist(a list of stupid pepole) and answer user with words in listf . remove user with `[Dd]el fuck`
   - `[Dd] (reply)` : delete a message.
   - `[Pp]y (reply)` : run code python3
   - `[Ii]D (reply)` : show chat id 
