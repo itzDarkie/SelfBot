@@ -217,13 +217,11 @@ def text_me(client, message):
     elif text in r.hgetall("qanswer"):
         txt = r.hgetall("qanswer")[text]
         t = txt.split(":")
-        try:
-            msg_id = message.reply_to_message.message_id
-        except:
-            msg_id = rmsg
+        msg_id = None
+        if message.reply_to_message: msg_id = message.reply_to_message.message_id
         if t[0] == "GIF":
             #sendgif
-            app.send_animation(message.chat.id,t[1], reply_to_message_id=msg_id)
+            app.send_animation(message.chat.id,t[1],reply_to_message_id=msg_id)
         elif t[0] == "STICKER":
             app.send_sticker(message.chat.id, t[1], reply_to_message_id=msg_id)
 
@@ -240,10 +238,12 @@ def text_me(client, message):
             app.send_document(message.chat.id, t[1], reply_to_message_id=msg_id)
 
         elif t[0] == "PHOTO":
-            app.send_photo(message.chat.id, t[1], reply_to_message_id=msg_id)
+            app.send_photo(message.chat.id, t[1], reply_to_message_id=msg_id)        
 
         app.delete_messages(message.chat.id, [message.message_id])
-        
+
+
+
     else:return
 
 # ADD FOSH
@@ -882,7 +882,7 @@ def today(client,message):
     monthM = M.strftime("%B")
     dayM = M.strftime("%j")
 
-    text = f"""TODAY\nClock : `{timeS}`\nDate : `{dateS}`\n------------\n\nDate : `{dateM}`\nWeekday : `{weekM}`\nMonth : `{monthM}`\nDayNumberYear : `{dayM}/365`
+    text = f"""TODAY\nClock : `{timeS}`\nDate : `{dateS}`\n------------\nDate : `{dateM}`\nWeekday : `{weekM}`\nMonth : `{monthM}`\nDayNumberYear : `{dayM}/365`
         """
     send = app.edit_message_text(text=text,
             chat_id=message.chat.id,
