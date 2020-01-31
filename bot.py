@@ -423,8 +423,6 @@ def delete(client,message):
 # @app.on_message(Filters.me &  Filters.regex("^[Cc]learb$") , group=15)
 
 
-
-
 ### CHAT ID
 @app.on_message(Filters.me  &Filters.reply &  Filters.regex("^([Ii]d)$") , group=16)
 def id(client,message):
@@ -962,7 +960,7 @@ def ublock (client, message):
     except:
         pass
 
-
+###########  OFFLINE OPTIONS  ###########
 @app.on_message(Filters.private , group=50)
 def me (client,message):
     me = app.get_me()
@@ -1021,6 +1019,31 @@ def offline_mode(client, message):
         time.sleep(float(r.get("autodeltime")))
         app.delete_messages(message.chat.id,[send.message_id])
 
+
+###########  AUTO EPLY  ###########
+
+@app.on_message(Filters.me & Filters.regex("^[Aa]utoreply$") , group = 53)
+def auto_reply(client,message):
+    chatid = str(message.chat.id)
+    if chatid in r.smembers("reply"):
+        r.srem("reply", chatid)
+        text = f"[{chatid}](tg://user?id={chatid}) - Deleted from Autoreply!"
+    else:
+        r.sadd("reply", chatid)
+        text = f"[{chatid}](tg://user?id={chatid}) - Added to Autoreply!"
+    send =app.edit_message_text(text=text,
+            chat_id=message.chat.id,
+            message_id=message.message_id,)     
+    if r.get("autodel") == "on":
+        time.sleep(float(r.get("autodeltime")))
+        app.delete_messages(message.chat.id,[send.message_id])
+
+
+@app.on_message( (Filters.private | Filters.group) , group = 54)
+def reply_message (client,message):
+    userid = str(message.from_user.id)
+    if userid in r.smembers("reply"):
+        
 
 app.run()
 
